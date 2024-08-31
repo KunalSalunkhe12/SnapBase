@@ -9,6 +9,6 @@ program
   .version(packageJson.version);
 
 require("./commands/configure")(program);
+require("./commands/backup")(program);
 
-// Configure command to set up database connection
 program.parse(process.argv);

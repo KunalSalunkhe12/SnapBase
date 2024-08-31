@@ -23,36 +23,37 @@ module.exports = (program) => {
       switch (dbType) {
         case "mysql":
         case "postgresql":
-          config.host = await input({
-            message: "Enter host (default: localhost):",
-            default: "localhost",
-          });
-          config.port = await input({
-            message: `Enter port (default: ${
-              dbType === "mysql" ? 3306 : 5432
-            }):`,
-            default: dbType === "mysql" ? "3306" : "5432",
-          });
-          config.user = await input({ message: "Enter username:" });
-          config.password = await password({ message: "Enter password:" });
-          config.database = await input({ message: "Enter database name:" });
+          config = {
+            host: await input({
+              message: "Enter host name:",
+              default: "localhost",
+            }),
+            port: await input({
+              message: "Enter port:",
+              default: dbType === "mysql" ? "3306" : "5432",
+            }),
+            user: await input({ message: "Enter username:" }),
+            password: await password({ message: "Enter password:" }),
+            database: await input({ message: "Enter database name:" }),
+          };
           break;
 
         case "sqlite":
-          config.filepath = await input({
-            message:
-              "Enter file path for SQLite database (default: ./database.sqlite):",
-            default: "./database.sqlite",
-          });
+          config = {
+            filepath: await input({
+              message: "Enter file path for SQLite database:",
+              default: "./database.sqlite",
+            }),
+          };
           break;
 
         case "mongodb":
-          config.uri = await input({
-            message:
-              "Enter MongoDB connection URI (default: mongodb://localhost:27017):",
-            default: "mongodb://localhost:27017",
-          });
-          config.database = await input({ message: "Enter database name:" });
+          config = {
+            uri: await input({
+              message: "Enter MongoDB connection URI:",
+              default: "mongodb://localhost:27017",
+            }),
+          };
           break;
 
         default:

@@ -1,21 +1,22 @@
-const getConfig = require("../utils/getConfig.js");
-const createMYSQLBackup = require("../utils/mysql-backup.js");
-const createMongoDBBackup = require("../utils/mongodb-backup.js");
+import getConfig from "../lib/getConfig.js";
+import { createMongoDBBackup } from "../lib/mongodb/mongodb-backup.js";
 
-module.exports = (program) => {
+export default (program) => {
   program
     .command("backup")
     .description("Backup database")
-    .allowUnknownOption(true)
-    .action(async (_, options) => {
-      const config = await getConfig();
+    .option(
+      "--config <path>",
+      "Path to configuration file",
+      "./backup-config.json"
+    )
+    .action(async (options) => {
+      const { config } = options;
+      const configData = await getConfig(config);
 
-      switch (config.type) {
-        case "mysql":
-          await createMYSQLBackup(config);
-          break;
+      switch (configData.type) {
         case "mongodb":
-          await createMongoDBBackup(config, options);
+          await createMongoDBBackup(configData, options);
           break;
 
         default:

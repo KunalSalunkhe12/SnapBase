@@ -35,17 +35,26 @@ export default (program) => {
               host: await input({
                 message: "Enter host name:",
                 default: "localhost",
+                required: true,
               }),
               port: await input({
                 message: "Enter port:",
                 default: dbType === "mysql" ? "3306" : "5432",
+                required: true,
               }),
               user: await input({ message: "Enter username:" }),
-              password: await password({ message: "Enter password:" }),
-              databaseName: await input({ message: "Enter database name:" }),
+              password: await password({
+                message: "Enter password:",
+                required: true,
+              }),
+              databaseName: await input({
+                message: "Enter database name:",
+                required: true,
+              }),
               backupDir: await input({
                 message: "Enter the path to save backup files:",
                 default: "./backup",
+                required: true,
               }),
             };
             break;
@@ -55,13 +64,16 @@ export default (program) => {
               filepath: await input({
                 message: "Enter file path for SQLite database:",
                 default: "./database.sqlite",
+                required: true,
               }),
               databaseName: await input({
                 message: "Enter database name:",
+                required: true,
               }),
               backupDir: await input({
                 message: "Enter the path to save backup files:",
                 default: "./backup",
+                required: true,
               }),
             };
             break;
@@ -71,13 +83,16 @@ export default (program) => {
               uri: await input({
                 message: "Enter MongoDB connection URI:",
                 default: "mongodb://localhost:27017",
+                required: true,
               }),
               databaseName: await input({
                 message: "Enter database name:",
+                required: true,
               }),
               backupDir: await input({
                 message: "Enter the path to save backup files:",
                 default: "./backup",
+                required: true,
               }),
             };
             break;
@@ -92,7 +107,11 @@ export default (program) => {
           configPath,
           JSON.stringify({ type: dbType, ...config }, null, 2)
         );
-        console.log(chalk.green(`Configuration saved to ${configPath}`));
+        console.log(
+          chalk.green(
+            `Configuration saved to ${configPath}, Make sure to add the file to .gitignore :)`
+          )
+        );
       } catch (e) {
         console.log(chalk.red("Something went wrong. Please try again."));
         console.log(

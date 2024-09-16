@@ -12,7 +12,6 @@ export default (program) => {
     )
     .option("-c, --collection <name>", "Specify the collection name")
     .action(async (options) => {
-      console.log(options);
       const config = await getConfig(options.config);
 
       switch (config.type) {

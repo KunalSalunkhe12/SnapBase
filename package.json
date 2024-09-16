@@ -18,7 +18,7 @@
     "mysql2": "^3.11.1",
     "ora": "^8.1.0",
     "pg": "^8.12.0",
-    "shell-escape": "^0.2.0",
+    "snapbase": "file:",
     "sqlite3": "^5.1.7"
   }
 }

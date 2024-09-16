@@ -43,8 +43,8 @@ export default (program) => {
               user: await input({ message: "Enter username:" }),
               password: await password({ message: "Enter password:" }),
               databaseName: await input({ message: "Enter database name:" }),
-              outputDir: await input({
-                message: "Enter output directory for backup files:",
+              backupDir: await input({
+                message: "Enter the path to save backup files:",
                 default: "./backup",
               }),
             };
@@ -59,8 +59,8 @@ export default (program) => {
               databaseName: await input({
                 message: "Enter database name:",
               }),
-              outputDir: await input({
-                message: "Enter output directory for backup files:",
+              backupDir: await input({
+                message: "Enter the path to save backup files:",
                 default: "./backup",
               }),
             };
@@ -75,8 +75,8 @@ export default (program) => {
               databaseName: await input({
                 message: "Enter database name:",
               }),
-              outputDir: await input({
-                message: "Enter output directory for backup files:",
+              backupDir: await input({
+                message: "Enter the path to save backup files:",
                 default: "./backup",
               }),
             };

@@ -1,5 +1,15 @@
 import getConfig from "../lib/getConfig.js";
-import { createMongoDBBackup } from "../lib/mongodb/mongodb-backup.js";
+import { MongoDBBackup } from "../lib/backups/mongodbBackup.js";
+
+function getBackupClass(config) {
+  switch (config.type) {
+    case "mongodb":
+      return new MongoDBBackup(config);
+    // Add cases for other databases
+    default:
+      throw new Error("Unsupported database type");
+  }
+}
 
 export default (program) => {
   program
@@ -12,14 +22,7 @@ export default (program) => {
     )
     .action(async (options) => {
       const config = await getConfig(options.config);
-
-      switch (config.type) {
-        case "mongodb":
-          await createMongoDBBackup(config, options);
-          break;
-
-        default:
-          break;
-      }
+      const backupInstance = getBackupClass(config);
+      await backupInstance.createBackup();
     });
 };

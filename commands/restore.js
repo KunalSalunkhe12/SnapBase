@@ -1,6 +1,7 @@
 import getConfig from "../lib/getConfig.js";
 import { MongoDBBackup } from "../lib/backups/mongodbBackup.js";
 import { MySQLBackup } from "../lib/backups/mySqlBackup.js";
+import { logActivity } from "../lib/logger.js";
 
 function getBackupClass(config) {
   switch (config.type) {
@@ -39,6 +40,7 @@ export default (program) => {
 
       const endTime = Date.now();
       logActivity({
+        command: "restore",
         startTime: new Date(startTime),
         endTime: new Date(endTime),
         status,

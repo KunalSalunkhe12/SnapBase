@@ -1,6 +1,6 @@
 {
   "name": "snapbase",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Command-line interface (CLI) utility for backing up any type of database.",
   "main": "cli.js",
   "type": "module",

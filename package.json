@@ -4,6 +4,10 @@
   "description": "A Command-line interface (CLI) utility for backing up any type of database.",
   "main": "cli.js",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KunalSalunkhe12/SnapBase"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

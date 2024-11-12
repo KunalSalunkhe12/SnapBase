@@ -25,6 +25,25 @@ export default (program) => {
     .action(async (options) => {
       const config = await getConfig(options.config);
       const backupInstance = getBackupClass(config);
-      await backupInstance.createBackup();
+
+      const startTime = Date.now();
+      let status = "success";
+      let error = null;
+
+      try {
+        await backupInstance.createBackup();
+      } catch (err) {
+        status = "failed";
+        error = err;
+      }
+
+      const endTime = Date.now();
+      logActivity({
+        startTime: new Date(startTime),
+        endTime: new Date(endTime),
+        status,
+        timeTaken: endTime - startTime,
+        error,
+      });
     });
 };

@@ -1,6 +1,6 @@
 import getConfig from "../lib/getConfig.js";
 import { MongoDBBackup } from "../lib/backups/mongodbBackup.js";
-import { MySQLBackup } from "../lib/backups/mysqlBackup.js";
+import { MySQLBackup } from "../lib/backups/mySqlBackup.js";
 
 function getBackupClass(config) {
   switch (config.type) {
@@ -24,12 +24,26 @@ export default (program) => {
     )
     .action(async (options) => {
       const config = await getConfig(options.config);
+      const backupInstance = getBackupClass(config);
+
+      const startTime = Date.now();
+      let status = "success";
+      let error = null;
 
       try {
-        const backupInstance = getBackupClass(config);
         await backupInstance.restoreBackup(options); // Assuming the restore method can take options if needed
-      } catch (error) {
-        console.error(error.message);
+      } catch (err) {
+        status = "failed";
+        error = err;
       }
+
+      const endTime = Date.now();
+      logActivity({
+        startTime: new Date(startTime),
+        endTime: new Date(endTime),
+        status,
+        timeTaken: endTime - startTime,
+        error,
+      });
     });
 };

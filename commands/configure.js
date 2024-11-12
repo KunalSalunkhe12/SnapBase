@@ -19,8 +19,6 @@ export default (program) => {
           message: "Select database type",
           choices: [
             { name: "MySQL", value: "mysql" },
-            { name: "PostgreSQL", value: "postgresql" },
-            { name: "SQLite", value: "sqlite" },
             { name: "MongoDB", value: "mongodb" },
           ],
         });
@@ -30,7 +28,6 @@ export default (program) => {
         // Prompt user for database connection settings based on the selected database type
         switch (dbType) {
           case "mysql":
-          case "postgresql":
             config = {
               host: await input({
                 message: "Enter host name:",
@@ -45,25 +42,6 @@ export default (program) => {
               user: await input({ message: "Enter username:" }),
               password: await password({
                 message: "Enter password:",
-                required: true,
-              }),
-              databaseName: await input({
-                message: "Enter database name:",
-                required: true,
-              }),
-              backupDir: await input({
-                message: "Enter the path to save backup files:",
-                default: "./backup",
-                required: true,
-              }),
-            };
-            break;
-
-          case "sqlite":
-            config = {
-              filepath: await input({
-                message: "Enter file path for SQLite database:",
-                default: "./database.sqlite",
                 required: true,
               }),
               databaseName: await input({

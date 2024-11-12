@@ -34,7 +34,6 @@ export default (program) => {
 
       try {
         const { info } = await backupInstance.createBackup();
-        console.log(info);
         stderr = info;
       } catch (err) {
         status = "failed";

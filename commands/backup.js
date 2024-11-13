@@ -33,7 +33,12 @@ export default (program) => {
       let stderr = null;
 
       try {
-        const { info } = await backupInstance.createBackup();
+        const { info, error } = await backupInstance.createBackup();
+
+        if (error) {
+          throw new Error(error);
+        }
+
         stderr = info;
       } catch (err) {
         status = "failed";

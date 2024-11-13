@@ -1,6 +1,6 @@
 {
   "name": "snapbase",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Command-line interface (CLI) utility for backing up any type of database.",
   "main": "cli.js",
   "type": "module",
@@ -10,6 +10,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "snapbase": "cli.js"
   },
   "author": "Kunal Salunkhe",
   "license": "ISC",

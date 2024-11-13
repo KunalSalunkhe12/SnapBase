@@ -41,16 +41,32 @@ Before installing the CLI, ensure you have:
 
 ## Installation
 
+### Global Installation
+
 Install the CLI globally via npm:
 
 ```bash
 npm install -g snapbase
 ```
 
+This allows you to run the snapbase command directly from the terminal.
+
+```bash
+snapbase configure --out ./backup-config.json
+```
+
+### Local Installation
+
 Or install locally in your project:
 
 ```bash
 npm install snapbase
+```
+
+⚠️ After a local installation, you have to use npx to run the CLI:
+
+```bash
+npx snapbase configure --out ./backup-config.json
 ```
 
 ## Configuration
